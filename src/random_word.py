@@ -3,6 +3,7 @@ import openpyxl
 
 blacklist = []
 
+
 def random_word_generator(word_sheet, word_list, temp_list):
     cleared = False
     while not cleared:

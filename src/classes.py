@@ -5,3 +5,4 @@ class Word:
         self.starting_row = starting_row
         self.starting_column = starting_column
         self.length = length
+

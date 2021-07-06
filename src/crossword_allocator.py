@@ -223,6 +223,7 @@ def map_word(word_list, crossword):
 
             temp_column = temp_column + 1
 
+
 def map_limits(row, column, orientation, crossword):
     print(f"map limits running, row= {row} column={column}")
     print(f"crossword cell = {crossword.cell(row, column).value}")
