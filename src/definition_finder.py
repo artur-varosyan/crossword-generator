@@ -1,19 +1,22 @@
-from bs4 import BeautifulSoup
 import requests
 
+
 def find_definition(word):
-    print("Started webscraping...")
-    URL = f"https://www.dictionary.com/browse/{word}"
-    page = requests.get(URL)
-
-    soup = BeautifulSoup(page.text, "html.parser")
-
-    definition = soup.find(class_="one-click-content css-ana4le-PosSupportingInfo e1q3nk1v1").get_text()
-    output = ""
-
-    for char in definition:
-        if char == ";" or char == ".":
-            return output
-        else:
-            output += char
-    return output
+    url = f"https://api.dictionaryapi.dev/api/v2/entries/en_GB/{word}"
+    response = requests.get(url)
+    if response.status_code == 404:  # if GB dictionary does not contain word try US dictionary
+        url = f"https://api.dictionaryapi.dev/api/v2/entries/en_US/{word}"
+        response = requests.get(url)
+    if response.status_code == 200:  # success
+        output = response.json()
+        meanings = output[0]["meanings"]
+        first_meaning = meanings[0]
+        definitions = first_meaning["definitions"]
+        definition = definitions[0]["definition"]
+        print(definition)
+        return definition
+    else:
+        print("Incorrect error code")
+        print(f"API Request call returned: {response.status_code}. Word queried: {word}")
+        print("Returning the word as definition")
+        return f"Definition not found, answer: {word}"
