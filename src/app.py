@@ -1,17 +1,13 @@
 import openpyxl
-import shutil
-import os
 from random_word import random_word_generator
 from crossword_allocator import allocate_word
 from crossword_formatting import format_crossword
-from classes import Word
 
 
 def main():
     dev_mode = False
 
     print("Welcome to the Crossword Generator Project written in Python!")
-    print("It uses open source packages BeautifulSoup and openpyxl")
     print("")
     input("Press enter to continue")
 
@@ -33,14 +29,14 @@ def main():
         x = x + 1
         if len(word_list) == 50:
             finished = True
-        if dev_mode == True:
+        if dev_mode:
             crossword_db.save(f"Crossword{x}.xlsx")
 
     answers = crossword_db.copy_worksheet(crossword)
     answers.title = "Answers"
     format_crossword(crossword, hints, answers)
 
-    crossword_db.save("Crossword.xlsx")
+    crossword_db.save("../Crossword.xlsx")
     print("Program finished successfully")
     print(f"There are {len(word_list)} words in the crossword")
 
