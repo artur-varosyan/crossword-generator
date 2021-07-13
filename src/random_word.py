@@ -1,25 +1,38 @@
 import random
-import openpyxl
+import sqlite3
 
 blacklist = []
+MIN_WORD_LENGTH = 3
+MIN_FIRST_WORD_LENGTH = 8
 
 
-def random_word_generator(word_sheet, word_list, temp_list):
-    cleared = False
-    while not cleared:
-        id = random.randint(1, 3000)
-        temp_cell = word_sheet.cell(id + 2, 3)
-        temp_word = temp_cell.value
-        print(temp_word)
-        if len(temp_word) < 3 or temp_word in word_list or temp_word in blacklist:
+def generate_random_word(word_list):
+    try:
+        with sqlite3.connect("../resources/Words.db") as connection:
+            cursor = connection.cursor()
             cleared = False
-            print("Conditions not met")
-        elif len(word_list) == 0:
-            # print("It is the first word")
-            if len(temp_word) > 8:
-                # print("long enough for first word")
-                cleared = True
-        else:
-            cleared = True
-            print("Conditions met. Word is returned")
+            while not cleared:
+                rand_num = random.randint(1, 3001)
+                query = "SELECT word FROM Words WHERE id = ?"
+                try:
+                    cursor.execute(query, (rand_num,))
+                except sqlite3.DatabaseError:
+                    raise sqlite3.DatabaseError("Error while trying to access a random word from the database!")
+                row = cursor.fetchall()
+                temp_word = row[0][0]
+                cleared = check_if_cleared(temp_word, word_list)
+    except EnvironmentError:
+        raise EnvironmentError("Problem accessing the Words.db database!")
+
     return temp_word
+
+
+def check_if_cleared(temp_word, word_list):
+    if len(temp_word) < MIN_WORD_LENGTH or temp_word in word_list or temp_word in blacklist:
+        cleared = False  # conditions not met
+    elif len(word_list) == 0:
+        if len(temp_word) > MIN_FIRST_WORD_LENGTH:  # first word in the crossword should be long
+            cleared = True
+    else:
+        cleared = True
+    return cleared
