@@ -11,7 +11,7 @@ def main():
     print("")
     input("Press enter to continue")
 
-    word_db = openpyxl.load_workbook("../WordsList.xlsx")
+    word_db = openpyxl.load_workbook("../resources/WordsList.xlsx")
     word_sheet = word_db["Sheet"]
 
     crossword_db = openpyxl.load_workbook("../resources/CrosswordTemplate.xlsx")
@@ -24,8 +24,8 @@ def main():
     finished = False
     x = 0
     while not finished:
-        temp_word = random_word_generator(word_sheet, word_list, temp_list)
-        allocate_word(temp_word, word_list, temp_list, crossword, hints)
+        temp_word = random_word_generator(word_sheet, word_list)
+        allocate_word(temp_word, word_list, crossword, hints)
         x = x + 1
         if len(word_list) == 50:
             finished = True
@@ -34,7 +34,7 @@ def main():
 
     answers = crossword_db.copy_worksheet(crossword)
     answers.title = "Answers"
-    format_crossword(crossword, hints, answers)
+    format_crossword(crossword, answers)
 
     crossword_db.save("../Crossword.xlsx")
     print("Program finished successfully")

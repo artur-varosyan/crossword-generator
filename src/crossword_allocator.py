@@ -1,12 +1,10 @@
-import openpyxl
 from openpyxl.comments import Comment
 
 from classes import Word
 from definition_finder import find_definition
-import random
 
 
-def allocate_word(temp_word, word_list, temp_list, crossword, hints):
+def allocate_word(temp_word, word_list, crossword, hints):
     if len(word_list) == 0:
         left_indent = (25 - len(temp_word)) / 2
         left_indent = round(left_indent)

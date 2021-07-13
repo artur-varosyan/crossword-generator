@@ -2,7 +2,7 @@ import openpyxl
 from openpyxl.styles import PatternFill
 
 
-def format_crossword(crossword, hints, answers):
+def format_crossword(crossword, answers):
     black_fill = PatternFill(start_color='00000000',
                              end_color='00000000',
                              fill_type='solid')
@@ -12,7 +12,6 @@ def format_crossword(crossword, hints, answers):
             if crossword.cell(x, y).value is None or crossword.cell(x, y).value == "" or \
                     crossword.cell(x,y).value == "@" or crossword.cell(x, y).value == "!" or \
                     crossword.cell(x, y).value == "=":
-                print("passed if statement")
                 crossword.cell(x, y).value = ""
                 crossword.cell(x, y).fill = black_fill
                 answers.cell(x, y).value = ""
