@@ -3,7 +3,7 @@ import sqlite3
 
 blacklist = []
 MIN_WORD_LENGTH = 3
-MIN_FIRST_WORD_LENGTH = 8
+MIN_FIRST_WORD_LENGTH = 9
 
 
 def generate_random_word(word_list):
@@ -29,10 +29,8 @@ def generate_random_word(word_list):
 
 def check_if_cleared(temp_word, word_list):
     if len(temp_word) < MIN_WORD_LENGTH or temp_word in word_list or temp_word in blacklist:
-        cleared = False  # conditions not met
-    elif len(word_list) == 0:
-        if len(temp_word) > MIN_FIRST_WORD_LENGTH:  # first word in the crossword should be long
-            cleared = True
+        return False  # conditions not met
+    elif len(word_list) == 0 and len(temp_word) < MIN_FIRST_WORD_LENGTH:  # first word in the crossword should be long
+        return False
     else:
-        cleared = True
-    return cleared
+        return True
