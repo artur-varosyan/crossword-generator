@@ -15,8 +15,8 @@ You can then install the required dependencies using:
 `pip install -r requirements.txt`
 
 ## Usage
-* Run the python script from the top level directory using:
-`python3 src/app.py`
+* Run the python script from the **src directory** using:
+`python3 app.py`
 * Press enter and wait for the crossword to be created.
 * Open the newly created `Crossword.xlsx` file using Microsoft Office Excel compatible software and enjoy solving it!
 
