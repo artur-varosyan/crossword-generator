@@ -1,8 +1,11 @@
 # Crossword Generator
 Crossword Generator is an algorithm that creates a unique crossword each time it is executed. It randomly selects words, finds common characters within them and matches them to create a crossword. The crossword is then saved in a Microsoft Office Excel spreadsheet.
 
+![Screenshot of Crossword](docs/crossword_img1.png)
+![Screenshot of Crossword](docs/crossword_img2.png)
+
 ## Installation
-*I recommend using creating and using a virtual environment to run this application:*
+*I recommend creating and using a virtual environment to run this application:*
 ```shell
 python3 -m venv venv
 source venv/bin/activate
