@@ -10,6 +10,7 @@ def main():
     print("Welcome to the Crossword Generator Project written in Python!")
     print("")
     input("Press enter to continue")
+    print("Creating crossword...")
 
     crossword_db = openpyxl.load_workbook("../resources/CrosswordTemplate.xlsx")
     crossword = crossword_db["Crossword"]
@@ -33,6 +34,7 @@ def main():
     format_crossword(crossword, answers)
 
     crossword_db.save("../Crossword.xlsx")
+    print("")
     print("Program finished successfully")
     print(f"There are {len(word_list)} words in the crossword")
 

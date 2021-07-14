@@ -7,7 +7,6 @@ def format_crossword(crossword, answers):
                              fill_type='solid')
     for x in range(1, 27):
         for y in range(1, 27):
-            print(crossword.cell(x, y).value)
             if crossword.cell(x, y).value is None or crossword.cell(x, y).value == "" or \
                     crossword.cell(x,y).value == "@" or crossword.cell(x, y).value == "!" or \
                     crossword.cell(x, y).value == "=":

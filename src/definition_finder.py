@@ -13,10 +13,7 @@ def find_definition(word):
         first_meaning = meanings[0]
         definitions = first_meaning["definitions"]
         definition = definitions[0]["definition"]
-        print(definition)
         return definition
     else:
-        print("Incorrect error code")
-        print(f"API Request call returned: {response.status_code}. Word queried: {word}")
-        print("Returning the word as definition")
+        # Definition could not be found for the given word
         return f"Definition not found, answer: {word}"
